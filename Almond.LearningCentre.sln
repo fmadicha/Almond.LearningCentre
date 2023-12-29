@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almond.LearningCentre", "Almond.LearningCentre.csproj", "{68CC49F9-93DA-4FAB-977E-F3726688D184}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68CC49F9-93DA-4FAB-977E-F3726688D184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CC49F9-93DA-4FAB-977E-F3726688D184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CC49F9-93DA-4FAB-977E-F3726688D184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CC49F9-93DA-4FAB-977E-F3726688D184}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30D40676-EC82-4303-B67C-A4FAD2DEBC9C}
+	EndGlobalSection
+EndGlobal
