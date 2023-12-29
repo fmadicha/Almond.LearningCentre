@@ -10,29 +10,30 @@ namespace Almond.LearningCentre.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return View();
+        }
 
-        //[HttpGet]
-        //public IActionResult GetStudent(int id)
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult GetStudent(int id)
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public IActionResult UpdateStudent(Student student)
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult Upsert(Student student)
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //public IActionResult DeleteStudent(int id)
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult DeleteStudent(int id)
+        {
+            return View();
+        }
 
-        //[HttpPut]
-        //public IActionResult CreateStudent(Student student)
-        //{
-        //    return View();
-        //}
+       
     }
 }
