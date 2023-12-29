@@ -13,13 +13,51 @@ namespace Almond.LearningCentre.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return View();
+            var studentList = new List<Student>() {
+                new Student()
+                {
+                       Id = 1,
+                ImageUrl = "student.jpg",
+                FirstName = "Farirai",
+                Surname = " Darikwa",
+                Grade = Models.Enum.Grades.GradeOne,
+                DateOfBirth =DateTime.Now,
+                GuardianName = "Mary Darikwa",
+                GuardianAddress = "11 Las Vegas Cresc Cosmo Cit 2188",
+                GuardianPhoneNumber = "071 868 3001",
+                GuardianEmail = "darikwaf@gmail.com",
+                Allergies = " Non",
+                IsDeleted =  true
+                }
+                };
+            return Json(new { data = studentList });
         }
 
         [HttpGet]
         public IActionResult GetStudent(int id)
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Upsert(int studentId)
+        {
+            var model = new Student()
+            {
+                Id = 1,
+                ImageUrl = "hhhgkjl",
+                FirstName = "Farirai",
+                Surname = " Darikwa",
+                Grade = Models.Enum.Grades.GradeOne,
+                DateOfBirth = DateTime.Now,
+                GuardianName = "Mary Darikwa",
+                GuardianAddress = "11 Las Vegas Cresc Cosmo Cit 2188",
+                GuardianPhoneNumber = "071 868 3001",
+                GuardianEmail = "darikwaf@gmail.com",
+                Allergies = " Non",
+                IsDeleted = true,
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -34,6 +72,6 @@ namespace Almond.LearningCentre.Controllers
             return View();
         }
 
-       
+
     }
 }

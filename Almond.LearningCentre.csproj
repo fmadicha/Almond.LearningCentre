@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="wwwroot\css\NewFolder1\" />
   </ItemGroup>
 
 </Project>

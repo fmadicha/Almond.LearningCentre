@@ -4,7 +4,7 @@
     {
 
        
-        public string Image { get; set; }
+        public string ImageUrl { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }

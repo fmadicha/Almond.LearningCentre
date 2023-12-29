@@ -7,19 +7,17 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            "url": "/Student/GetAll"
+            "url": "/Teacher/GetAll"
         },
         "columns": [
             { "data": "imageUrl", "width": "15%" },
             { "data": "firstName", "width": "15%" },
             { "data": "surname", "width": "15%" },
-            { "data": "grade", "width": "15%" },
             { "data": "dateOfBirth", "width": "15%" },
-            { "data": "guardianName", "width": "15%" },
-            { "data": "guardianPhoneNumber", "width": "15%" },
-            { "data": "guardianEmail", "width": "15%" },
-            { "data": "allergies", "width": "15%" },
-            { "data": "isDeleted", "width": "15%" },
+            { "data": "homeAddress", "width": "15%" },
+            { "data": "phoneNumber", "width": "15%" },
+            { "data": "email", "width": "15%" },
+            { "data": "healthyProblems", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {

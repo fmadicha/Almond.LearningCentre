@@ -1,11 +1,11 @@
 ﻿<div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Student List</h2>
+            <h2 class="text-primary">Teacher List</h2>
 		</div>
         <div class="col-6 text-end">
-            <a asp-controller="Student" asp-action="Upsert" class="btn btn-primary">
-               <i class="bi bi-plus-circle"></i> &nbsp; Create New Student
+            <a asp-controller="Teacher" asp-action="Upsert" class="btn btn-primary">
+               <i class="bi bi-plus-circle"></i> &nbsp; Create New Teacher
 			</a>
 		</div>
 	</div>
@@ -17,13 +17,11 @@
             <th>Image</th>            
             <th>FirstName</th>
             <th>Surname</th>
-             <th>Grade</th>
               <th>Date Of Birth</th>
-               <th>Guardian Name</th>
-               <th>Guardian Address</th> 
-                <th>Guardian Phone Number</th> 
-                <th>Guardian Email</th>
-                <th>Allergies</th>
+              <th>Home Address</th> 
+                <th> Phone Number</th> 
+                <th> Email</th>
+                <th>Medical Problems</th>
             
             <th></th>
 		</tr>
@@ -32,5 +30,5 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/Student.js"></script>
+    <script src="~/js/Teacher.js"></script>
 }
