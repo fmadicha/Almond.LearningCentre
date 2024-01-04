@@ -11,24 +11,24 @@ namespace Almond.LearningCentre.Data.Repository
             this.context = context;
         }
 
-        public IQueryable<StudentCourses> GetAllStudentCourses()
+        public IQueryable<StudentCourse> GetAllStudentCourses()
         {
             return context.StudentCourses;
         }
-        public StudentCourses GetStudentCourses(int id)
+        public StudentCourse GetStudentCourses(int id)
         {
             return context.StudentCourses.Single(x => x.Id == id);
         }
-        public StudentCourses AddStudentCourses(StudentCourses studentCourses)
+        public StudentCourse AddStudentCourses(StudentCourse studentCourses)
         {
             context.AddAsync(studentCourses);
             return studentCourses;
         }
-        public void UpdateStudentCourses(StudentCourses studentCourses)
+        public void UpdateStudentCourses(StudentCourse studentCourses)
         {
             context.Entry(studentCourses).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
-        public void DeleteStudentCourses(StudentCourses studentCourses)
+        public void DeleteStudentCourses(StudentCourse studentCourses)
         {
             studentCourses.IsDeleted = true;
             context.Entry(studentCourses).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

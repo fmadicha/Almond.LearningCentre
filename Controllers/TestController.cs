@@ -5,8 +5,6 @@ namespace Almond.LearningCentre.Controllers
 {
     public class TestController : Controller
     {
-      
-
         [HttpGet]
         public IActionResult Index()
         {
@@ -22,7 +20,7 @@ namespace Almond.LearningCentre.Controllers
                 Description= "Maths Paper 1 Test",
                 TotalMark = 50,
                 Term = Models.Enum.SchoolTerms.TermOne,
-                Weight = 0.25,
+                Weight = 0.25m,
                 PdfFile =  new byte[1], 
                 SubjectId = 01,
                
@@ -47,7 +45,7 @@ namespace Almond.LearningCentre.Controllers
                 Description = "Maths Paper 1 Test",
                 TotalMark = 50,
                 Term = Models.Enum.SchoolTerms.TermOne,
-                Weight = 0.25,
+                Weight = 0.25m,
                 PdfFile = new byte[1], 
                 SubjectId = 01,
 

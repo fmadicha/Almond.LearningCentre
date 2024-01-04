@@ -7,19 +7,11 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            "url": "/Student/GetAll"
+            "url": "/Subject/GetAll"
         },
         "columns": [
-            { "data": "imageUrl", "width": "15%" },
-            { "data": "firstName", "width": "15%" },
-            { "data": "surname", "width": "15%" },
-            { "data": "grade", "width": "15%" },
-            { "data": "dateOfBirth", "width": "15%" },
-            { "data": "guardianName", "width": "15%" },
-            { "data": "guardianPhoneNumber", "width": "15%" },
-            { "data": "guardianEmail", "width": "15%" },
-            { "data": "allergies", "width": "15%" },
-            { "data": "isDeleted", "width": "15%" },
+            { "data": "description", "width": "15%" },
+            { "data": "teacherId", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
@@ -45,7 +37,7 @@ function Delete(url) {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33', 
+        cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {

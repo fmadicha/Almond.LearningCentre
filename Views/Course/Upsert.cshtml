@@ -1,0 +1,82 @@
+﻿
+@model Course
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+	<input asp-for="Id" hidden />
+	
+
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+		<div class="col-12 pb-2">
+			<h2 class="text-primary">@(Model.Id!=0?"Update": "Create")  Course</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		
+		<div class="mb-3">
+			<label asp-for="Description"></label>
+			<input asp-for="Description" class="form-control" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		
+		<div class="mb-3 col-6">
+			<label asp-for="SubjectId"></label>
+			<select asp-for="SubjectId" asp-items="@ViewBag.SubjectList" class="form-select">
+				<option disabled selected>--Select SubjectId--</option>
+			</select>
+			<span asp-validation-for="SubjectId" class="text-danger"></span>
+		</div>
+		
+		
+		<div class="col-12">
+			@if (Model.Id != 0)
+			{
+				<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+			}
+			else
+			{
+				<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+			}
+			<a asp-controller="Course" asp-action="Index" class="btn btn-secondary" style="width:150px">
+				Back to List
+			</a>
+		</div>
+
+	</div>
+		
+	</div>
+
+	
+
+
+
+
+
+</form>
+
+@section Scripts{
+	@{
+	<partial name="_ValidationScriptsPartial" />
+	}
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+  
+	function ValidateInput(){
+		if(document.getElementById("uploadBox").value==""){
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: 'Please upload an Image!',
+			});
+			return false;
+		}
+		return true;
+	}
+</script>
+}
+

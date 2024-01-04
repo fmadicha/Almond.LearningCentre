@@ -1,4 +1,13 @@
+using Almond.LearningCentre.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
+//add connection string
+builder.Services.AddDbContext<AlmondDbContext>(options =>
+              options.UseSqlServer(
+                  builder.Configuration.GetConnectionString("AlmondDbConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
