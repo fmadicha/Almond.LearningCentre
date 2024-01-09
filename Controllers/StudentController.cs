@@ -52,24 +52,17 @@ namespace Almond.LearningCentre.Controllers
 
         [HttpGet]
         public IActionResult Upsert(int studentId)
-        {    // Done when you dont have a database when you want dummy data
-            //var model = new Student()
-            //{
-            //    Id = 1,
-            //    ImageUrl = "hhhgkjl",
-            //    FirstName = "Farirai",
-            //    Surname = " Darikwa",
-            //    Grade = Models.Enum.Grades.GradeOne,
-            //    DateOfBirth = DateTime.Now,
-            //    GuardianName = "Mary Darikwa",
-            //    GuardianAddress = "11 Las Vegas Cresc Cosmo Cit 2188",
-            //    GuardianPhoneNumber = "071 868 3001",
-            //    GuardianEmail = "darikwaf@gmail.com",
-            //    Allergies = " Non",
-            //    IsDeleted = true,
-            //};
-            var model = unitOfWork.StudentRepository.GetStudent(studentId);          
-            return View(model);
+        {    
+            if (studentId == 0)
+            {
+                var model = new Student();
+                return View(model);
+            }
+            else
+            {
+                var model = unitOfWork.StudentRepository.GetStudent(studentId);
+                return View(model);
+            }
         }
 
         [HttpPost]
