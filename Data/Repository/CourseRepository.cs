@@ -11,7 +11,7 @@ namespace Almond.LearningCentre.Data.Repository
             this.context = context;
         }
 
-        public IQueryable<Course> GetAllCourses()
+        public IEnumerable<Course> GetAllCourses()
         {
             return context.Courses;
         }
@@ -28,7 +28,7 @@ namespace Almond.LearningCentre.Data.Repository
         {
             context.Entry(course).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
-        public void DeleteCaurses(Course course)
+        public void DeleteCourses(Course course)
         {
             course.IsDeleted = true;
             context.Entry(course).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

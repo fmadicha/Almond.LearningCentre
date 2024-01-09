@@ -6,7 +6,7 @@ namespace Almond.LearningCentre.Data.Repository
     {
         CourseSubject AddCourseSubjects(CourseSubject courseSubject);
         void DeleteCourseSubject(CourseSubject courseSubject);
-        IQueryable<CourseSubject> GetAllCourseSubjects();
+        IEnumerable<CourseSubject> GetAllCourseSubjects();
         CourseSubject GetCourseSubject(int id);
         void UpdateCourseSubjects(CourseSubject courseSubject);
     }

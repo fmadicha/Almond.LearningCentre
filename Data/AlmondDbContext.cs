@@ -3,9 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Almond.LearningCentre.Data
 {
-    public class AlmondDbContext : DbContext
+    public partial class AlmondDbContext : DbContext
     {
-   
+
+        public AlmondDbContext()
+        {
+        }
 
         public AlmondDbContext(DbContextOptions<AlmondDbContext> options)
             : base(options)
@@ -47,21 +50,6 @@ namespace Almond.LearningCentre.Data
                     .HasForeignKey(d => d.TeacherId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Assessments_Teachers");
-
-                entity.HasOne(d => d.Test)
-                    .WithMany(p => p.Assessments)
-                    .HasForeignKey(d => d.TestId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Assessments_Tests");
-            });
-
-            modelBuilder.Entity<Course>(entity =>
-            {
-                entity.HasOne(d => d.Subject)
-                    .WithMany(p => p.Courses)
-                    .HasForeignKey(d => d.SubjectId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Courses_Subjects");
             });
 
             modelBuilder.Entity<CourseSubject>(entity =>
@@ -114,10 +102,10 @@ namespace Almond.LearningCentre.Data
                     .HasConstraintName("FK_Tests_Subjects");
             });
 
-            OnModelCreating(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);
         }
 
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
-
 

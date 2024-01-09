@@ -1,4 +1,6 @@
 using Almond.LearningCentre.Data;
+using Almond.LearningCentre.Data.Repository;
+using Almond.LearningCentre.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AlmondDbContext>(options =>
               options.UseSqlServer(
                   builder.Configuration.GetConnectionString("AlmondDbConnection")));
+
+//Register Classes
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IAssessmentRepository, AssessmentRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ICourseSubjectRepository, CourseSubjectRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentCoursesRepository, StudentCoursesRepository>();
+builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
+builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
+builder.Services.AddScoped<ITestRepository, TestRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

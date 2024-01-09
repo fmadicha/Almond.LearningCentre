@@ -1,11 +1,17 @@
-﻿using Almond.LearningCentre.Models;
+﻿using Almond.LearningCentre.Data.UnitOfWork;
+using Almond.LearningCentre.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Almond.LearningCentre.Controllers
 {
     public class TeacherController : Controller
     {
-       
+        private readonly IUnitOfWork unitOfWork;
+
+        public TeacherController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
         [HttpGet]
         public IActionResult Index()
         {
@@ -14,53 +20,34 @@ namespace Almond.LearningCentre.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var teacherList = new List<Teacher>() {
-                new Teacher()
-                {
-                Id = 1,
-                ImageUrl = "Teacher.jpg",
-                FirstName = "Farirai",
-                Surname = " Darikwa",
-                DateOfBirth =DateTime.Now,
-                HomeAddress = "11 Las Vegas Cresc Cosmo Cit 2188",
-                PhoneNumber = "071 868 3001",
-                Email = "darikwaf@gmail.com",
-                HealthyProblems = " Non"
-             
-                }
-                };
+            var teacherList = unitOfWork.TeacherRepository.GetAllTeachers();
             return Json(new { data = teacherList });
         }
 
         [HttpGet]
-        public IActionResult GetStudent(int id)
+        public IActionResult GetTeacher(int id)
         {
-            return View();
+            var teacher = unitOfWork.TeacherRepository.GetTeacher(id);
+            return Json(new {data=teacher});
         }
 
         [HttpGet]
-        public IActionResult Upsert(int teacherId)
+        public IActionResult Upsert(Teacher teacher)
         {
-            var model = new Teacher()
+           if(ModelState.IsValid)
             {
-                Id = 1,
-                ImageUrl = "Teacher.jpg",
-                FirstName = "Farirai",
-                Surname = " Darikwa",
-                DateOfBirth = DateTime.Now,
-                HomeAddress = "11 Las Vegas Cresc Cosmo Cit 2188",
-                PhoneNumber = "071 868 3001",
-                Email = "darikwaf@gmail.com",
-                HealthyProblems = " Non"
-               
-            };
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult Upsert(Student student)
-        {
-            return View();
+                if (teacher.Id == 0)
+                {
+                    unitOfWork.TeacherRepository.AddTeachers(teacher);
+                    unitOfWork.Save();
+                }
+                else
+                {
+                    unitOfWork.TeacherRepository.UpdateTeachers(teacher);
+                }
+                return View(Index);
+            }
+            return View(teacher);
         }
 
         [HttpPost]

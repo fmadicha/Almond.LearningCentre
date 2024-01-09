@@ -6,7 +6,7 @@ namespace Almond.LearningCentre.Data.Repository
     {
         Assessment AddAssessments(Assessment assessment);
         void DeleteAssessment(Assessment assessment);
-        IQueryable<Assessment> GetAllAssessments();
+        IEnumerable<Assessment> GetAllAssessments();
         Assessment GetAssessment(int id);
         void UpdateAssessments(Assessment assessment);
     }

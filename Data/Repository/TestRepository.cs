@@ -11,11 +11,11 @@ namespace Almond.LearningCentre.Data.Repository
             this.context = context;
         }
 
-        public IQueryable<Test> GetAllTests()
+        public IEnumerable<Test> GetAllTests()
         {
             return context.Tests;
         }
-        public Test GetStudent(int id)
+        public Test GetTest(int id)
         {
             return context.Tests.Single(x => x.Id == id);
         }

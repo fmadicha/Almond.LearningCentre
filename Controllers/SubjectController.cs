@@ -1,10 +1,18 @@
-﻿using Almond.LearningCentre.Models;
+﻿using Almond.LearningCentre.Data.UnitOfWork;
+using Almond.LearningCentre.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Almond.LearningCentre.Controllers
 {
+    
     public class SubjectController : Controller
     {
+        private readonly IUnitOfWork unitOfWork;
+
+        public SubjectController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
         [HttpGet]
         public IActionResult Index()
         {
@@ -13,40 +21,38 @@ namespace Almond.LearningCentre.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var subjectList = new List<Subject>() {
-                new Subject()
-                {
-                Id = 1,
-                Description= "Grade One ",
-                 TeacherId = 001,
-                }
-                };
+            var subjectList = unitOfWork.SubjectRepository.GetAllSubjects();
             return Json(new { data = subjectList });
         }
 
         [HttpGet]
         public IActionResult GetSubject(int id)
         {
-            return View();
+            var subject = unitOfWork.SubjectRepository.GetSubject(id);
+            return Json(new { data = subject });
         }
 
         [HttpGet]
-        public IActionResult Upsert(int subjectId)
-        {
-            var model = new Subject()
-            {
-                Id = 1,
-                Description = "Grade one",
-               TeacherId = 001,
-            };
-            return View(model);
-        }
-
-        [HttpPost]
         public IActionResult Upsert(Subject subject)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                if (subject.Id == 0)
+                {
+                    unitOfWork.SubjectRepository.AddSubjects(subject);
+                    unitOfWork.Save();
+                }
+                else
+                {
+                    unitOfWork.SubjectRepository.UpdateSubjects(subject);
+                }
+                return View(Index);
+            }
+            
+            return View(subject);
         }
+
+       
 
         [HttpPost]
         public IActionResult DeleteSubject(int id)

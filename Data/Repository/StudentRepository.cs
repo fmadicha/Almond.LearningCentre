@@ -11,9 +11,9 @@ namespace Almond.LearningCentre.Data.Repository
             this.context = context;
         }
 
-        public IQueryable<Student> GetAllStudents()
+        public IEnumerable<Student> GetAllStudents()
         {
-            return context.Students;
+            return context.Students.ToList();
         }
         public Student GetStudent(int id)
         {
@@ -21,7 +21,7 @@ namespace Almond.LearningCentre.Data.Repository
         }
         public Student AddStudents(Student student)
         {
-            context.AddAsync(student);
+            context.Add(student);
             return student;
         }
         public void UpdateStudents(Student student)

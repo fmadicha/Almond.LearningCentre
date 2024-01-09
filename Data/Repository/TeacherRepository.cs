@@ -11,7 +11,7 @@ namespace Almond.LearningCentre.Data.Repository
             this.context = context;
         }
 
-        public IQueryable<Teacher> GetAllTeachers()
+        public IEnumerable<Teacher> GetAllTeachers()
         {
             return context.Teachers;
         }

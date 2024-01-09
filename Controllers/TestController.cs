@@ -1,10 +1,17 @@
-﻿using Almond.LearningCentre.Models;
+﻿using Almond.LearningCentre.Data.UnitOfWork;
+using Almond.LearningCentre.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Almond.LearningCentre.Controllers
 {
     public class TestController : Controller
     {
+        private readonly IUnitOfWork unitOfWork;
+
+        public TestController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
         [HttpGet]
         public IActionResult Index()
         {
@@ -13,51 +20,35 @@ namespace Almond.LearningCentre.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var testList = new List<Test>() {
-                new Test()
-                {
-                Id = 1,
-                Description= "Maths Paper 1 Test",
-                TotalMark = 50,
-                Term = Models.Enum.SchoolTerms.TermOne,
-                Weight = 0.25m,
-                PdfFile =  new byte[1], 
-                SubjectId = 01,
-               
-
-                }
-                };
-            return Json(new { data = testList });
+            var testList = unitOfWork.TestRepository.GetAllTests();
+            return Json(new { data=testList });
         }
 
         [HttpGet]
         public IActionResult GetTest(int id)
         {
-            return View();
+            var test = unitOfWork.TestRepository.GetTest(id);
+            return Json(new { data = test });
         }
 
         [HttpGet]
-        public IActionResult Upsert(int testId)
-        {
-            var model = new Test()
-            {
-                Id = 1,
-                Description = "Maths Paper 1 Test",
-                TotalMark = 50,
-                Term = Models.Enum.SchoolTerms.TermOne,
-                Weight = 0.25m,
-                PdfFile = new byte[1], 
-                SubjectId = 01,
-
-
-            };
-            return View(model);
-        }
-
-        [HttpPost]
         public IActionResult Upsert(Test test)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (test.Id == 0)
+                {
+                    unitOfWork.TestRepository.AddTests(test);
+                    unitOfWork.Save();
+                }
+                else
+                {
+                    unitOfWork.TestRepository.UpdateTests(test);
+                }
+                return View(Index);
+            }
+            
+            return View(test);
         }
 
         [HttpPost]

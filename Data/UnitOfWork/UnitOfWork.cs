@@ -6,7 +6,7 @@ namespace Almond.LearningCentre.Data.UnitOfWork
     {
         protected readonly AlmondDbContext _context;
 
-
+        
         public UnitOfWork(AlmondDbContext context,
             IStudentRepository studentRepository,
             IAssessmentRepository assessmentRepository,
@@ -31,6 +31,7 @@ namespace Almond.LearningCentre.Data.UnitOfWork
         public IStudentRepository StudentRepository { get; }
         public IAssessmentRepository AssessmentRepository { get; }
         public ICourseRepository CourseRepository { get; }
+       
         public ICourseSubjectRepository CourseSubjectRepository { get; }
         public IStudentCoursesRepository StudentCoursesRepository { get; }
         public ISubjectRepository SubjectRepository { get; }

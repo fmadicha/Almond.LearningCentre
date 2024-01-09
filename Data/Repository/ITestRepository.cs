@@ -6,8 +6,8 @@ namespace Almond.LearningCentre.Data.Repository
     {
         Test AddTests(Test test);
         void DeleteTest(Test test);
-        IQueryable<Test> GetAllTests();
-        Test GetStudent(int id);
+        IEnumerable<Test> GetAllTests();
+        Test GetTest(int id);
         void UpdateTests(Test test);
     }
 }

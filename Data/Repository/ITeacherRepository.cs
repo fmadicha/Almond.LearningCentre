@@ -6,7 +6,7 @@ namespace Almond.LearningCentre.Data.Repository
     {
         Teacher AddTeachers(Teacher teacher);
         void DeleteTeacher(Teacher teacher);
-        IQueryable<Teacher> GetAllTeachers();
+        IEnumerable<Teacher> GetAllTeachers();
         Teacher GetTeacher(int id);
         void UpdateTeachers(Teacher teacher);
     }

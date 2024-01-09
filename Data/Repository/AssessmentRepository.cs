@@ -12,7 +12,7 @@ namespace Almond.LearningCentre.Data.Repository
             this.context = context;
         }
 
-        public IQueryable<Assessment> GetAllAssessments()
+        public IEnumerable<Assessment> GetAllAssessments()
         {
             return context.Assessments;
         }

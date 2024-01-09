@@ -1,10 +1,17 @@
-﻿using Almond.LearningCentre.Models;
+﻿using Almond.LearningCentre.Data.UnitOfWork;
+using Almond.LearningCentre.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Almond.LearningCentre.Controllers
 {
     public class CourseController : Controller
     {
+        private readonly IUnitOfWork unitOfWork;
+
+        public CourseController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
        
         [HttpGet]
         public IActionResult Index()
@@ -14,39 +21,34 @@ namespace Almond.LearningCentre.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var courseList = new List<Course>() {
-                new Course()
-                {
-                Id = 1,
-                Description= "Grade One ",
-                 SubjectId = 01,
-                }
-                };
+            var courseList = unitOfWork.CourseRepository.GetAllCourses();
             return Json(new { data = courseList});
         }
 
         [HttpGet]
         public IActionResult GetCourse(int id)
         {
-            return View();
+            var course = unitOfWork.CourseRepository.GetCourses(id);
+            return Json(new { data = course });
         }
 
         [HttpGet]
-        public IActionResult Upsert(int courseId)
-        {
-            var model = new Course()
-            {
-                Id = 1,
-                Description = "Grade one",
-                SubjectId = 01,
-            };
-            return View(model);
-        }
-
-        [HttpPost]
         public IActionResult Upsert(Course course)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                if (course.Id == 0)
+                {
+                    unitOfWork.CourseRepository.AddCourses(course);
+                    unitOfWork.Save();
+                }
+                else
+                {
+                    unitOfWork.CourseRepository.UpdateCourses(course);
+                }
+                return View(Index);
+            }
+            return View(course);
         }
 
         [HttpPost]
