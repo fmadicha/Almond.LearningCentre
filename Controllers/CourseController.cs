@@ -1,5 +1,6 @@
 ﻿using Almond.LearningCentre.Data.UnitOfWork;
 using Almond.LearningCentre.Models;
+using Almond.LearningCentre.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Almond.LearningCentre.Controllers
@@ -25,14 +26,46 @@ namespace Almond.LearningCentre.Controllers
             return Json(new { data = courseList});
         }
 
-        [HttpGet]
-        public IActionResult GetCourse(int id)
+       
+        private Test GetCourse(CourseVM course)
         {
-            var course = unitOfWork.CourseRepository.GetCourses(id);
-            return Json(new { data = course });
+            return new Test()
+            {
+                IsDeleted = course.IsDeleted,
+                Id = course.Id,
+                Description = course.Description,
+                CreatedBy = course.CreatedBy,
+                DateCreated = course.DateCreated,
+                IsEncrypted = course.IsEncrypted,
+                LastModifiedBy = course.LastModifiedBy,
+                LastModifiedDate = course.LastModifiedDate,
+                SubjectId = course.SubjectId
+                
+            };
+            throw new NotImplementedException();
+        }
+        [HttpGet]
+        public IActionResult Upsert(int courseId)
+        {
+            if (courseId == 0)
+            {
+                var model = new CourseVM()
+                {
+                   
+                    CreatedBy = "System",
+                   
+                    LastModifiedBy = "System"
+                };
+                return View(model);
+            }
+            else
+            {
+                var model = unitOfWork.CourseRepository.GetCourses(courseId);
+                return View(model);
+            }
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Upsert(Course course)
         {
             if (ModelState.IsValid)
@@ -46,7 +79,7 @@ namespace Almond.LearningCentre.Controllers
                 {
                     unitOfWork.CourseRepository.UpdateCourses(course);
                 }
-                return View(Index);
+                return RedirectToAction("Index"); //View(Index);
             }
             return View(course);
         }

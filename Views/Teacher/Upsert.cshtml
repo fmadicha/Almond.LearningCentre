@@ -1,9 +1,11 @@
 ﻿
-@model Teacher
+@model TeacherVM
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 	<input asp-for="Id" hidden />
 	<input asp-for="ImageUrl" hidden />
+	<input asp-for="CreatedBy" hidden />
+    <input asp-for="LastModifiedBy" hidden />
 
 	<div class="row">
 		<div class="col-10">
@@ -12,11 +14,11 @@
 			<h2 class="text-primary">@(Model.Id!=0?"Update": "Create")  Teacher</h2>
 			<hr />
 		</div>
-		@*<div asp-validation-summary="All"></div>*@
-		<div class="mb-3">
+		<div asp-validation-summary="All"></div>
+		@*<div class="mb-3">
 			<label asp-for="ImageUrl"></label>
 			<input type="file" id="uploadBox" name="file" class="form-control" />
-		</div>
+		</div>*@
 		<div class="mb-3">
 			<label asp-for="FirstName"></label>
 			<input asp-for="FirstName" class="form-control" />
@@ -24,7 +26,7 @@
 		</div>
 		<div class="mb-3">
 			<label asp-for="Surname"></label>
-			<textarea asp-for="Surname" rows="3" class="form-control"></textarea>
+			<input asp-for="Surname" rows="3" class="form-control"/>
 			<span asp-validation-for="Surname" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-6">
@@ -70,10 +72,10 @@
 
 	</div>
 		</div>
-		<div class="col-2 pt-4">
+		@*<div class="col-2 pt-4">
 			<img src="@Model.ImageUrl"
-			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
-		</div>
+			width="100" style="border-radius:5px; border:1px solid #bbb9b9" />
+		</div>*@
 	</div>
 
 	

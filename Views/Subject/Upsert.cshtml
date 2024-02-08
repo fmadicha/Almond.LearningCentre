@@ -1,5 +1,5 @@
 ﻿
-@model CourseVM
+@model Subject
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 	<input asp-for="Id" hidden />
@@ -8,13 +8,13 @@
 	
 
 	<div class="row">
-		
+		<div class="col-10">
 			<div class="border p-3 mt-4 row">
 		<div class="col-12 pb-2">
-			<h2 class="text-primary">@(Model.Id!=0?"Update": "Create")  Course</h2>
+			<h2 class="text-primary">@(Model.Id!=0?"Update": "Create")  Subject</h2>
 			<hr />
 		</div>
-		
+		@*<div asp-validation-summary="All"></div>*@
 		
 		<div class="mb-3">
 			<label asp-for="Description"></label>
@@ -23,21 +23,32 @@
 		</div>
 		
 		<div class="mb-3 col-6">
-			<label asp-for="SubjectId"></label>
-			<select asp-for="SubjectId"  name="SubjectId">
-				<option disabled selected></option>
-				 <option value="2">English</option>
+			<label asp-for="Teacher"></label>
+			<input asp-for="Teacher" class="form-control" />
+			<span asp-validation-for="Teacher" class="text-danger"></span>
+		</div>
+		
+		<div class="mb-3 col-6">
+			<label asp-for="Tests"></label>
+			<input asp-for="Tests" class="form-control" />
+			<span asp-validation-for="Tests" class="text-danger"></span>
+		</div>
+		 <div class="mb-3 col-6">
+            <label asp-for="CourseSubjects">Subject</label>
+            <select id="CourseSubjects"  name="Subject">
+                <option disabled selected>--Select SubjectId--</option>
+                <option value="2">English</option>
                 <option value="12">Maths</option>
                 <option value="13">Lifeskills</option>
                 <option value="15">Science</option>
                 <option value="16">Geography</option>
                 <option value="17">Biology</option>
-			</select>
-			 
-			<span asp-validation-for="SubjectId" class="text-danger"></span>
+            </select>
+            <span asp-validation-for="CourseSubjects" class="text-danger"></span>
+        </div>
 		</div>
 		
-		
+		</div>
 		<div class="col-12">
 			@if (Model.Id != 0)
 			{
@@ -47,21 +58,11 @@
 			{
 				<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
 			}
-			<a asp-controller="Course" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			<a asp-controller="Student" asp-action="Index" class="btn btn-secondary" style="width:150px">
 				Back to List
 			</a>
 		</div>
-
-	</div>
 		</div>
-	
-
-	
-
-
-
-
-
 </form>
 
 @section Scripts{
@@ -88,4 +89,3 @@
 	}
 </script>
 }
-

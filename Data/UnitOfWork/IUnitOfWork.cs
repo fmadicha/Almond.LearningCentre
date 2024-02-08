@@ -13,6 +13,6 @@ namespace Almond.LearningCentre.Data.UnitOfWork
         ISubjectRepository SubjectRepository { get; }
         ITestRepository TestRepository { get; }
         void Dispose();
-        Task Save();
+        void Save();
     } 
 }

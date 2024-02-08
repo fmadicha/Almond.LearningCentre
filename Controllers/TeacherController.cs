@@ -1,5 +1,6 @@
 ﻿using Almond.LearningCentre.Data.UnitOfWork;
 using Almond.LearningCentre.Models;
+using Almond.LearningCentre.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Almond.LearningCentre.Controllers
@@ -24,30 +25,69 @@ namespace Almond.LearningCentre.Controllers
             return Json(new { data = teacherList });
         }
 
-        [HttpGet]
-        public IActionResult GetTeacher(int id)
+       
+        public Teacher GetTeacher(TeacherVM teacher)
         {
-            var teacher = unitOfWork.TeacherRepository.GetTeacher(id);
-            return Json(new {data=teacher});
+
+            return new Teacher()
+            {
+                IsDeleted = teacher.IsDeleted,
+                Id = teacher.Id,
+                CreatedBy = teacher.CreatedBy,
+                DateCreated = teacher.DateCreated,
+                IsEncrypted = teacher.IsEncrypted,
+                LastModifiedBy = teacher.LastModifiedBy,
+                LastModifiedDate = teacher.LastModifiedDate,
+                FirstName = teacher.FirstName,
+                Surname = teacher.Surname,
+                DateOfBirth = teacher.DateOfBirth,
+                HomeAddress= teacher.HomeAddress,
+               PhoneNumber = teacher.PhoneNumber,
+                Email = teacher.Email,
+                ImageUrl="Test.jpg",
+                HealthyProblems= teacher.HealthyProblems
+            };
+            throw new NotImplementedException();
         }
 
-        [HttpGet]
-        public IActionResult Upsert(Teacher teacher)
+            [HttpGet]
+        public IActionResult Upsert(int teacherId)
+        {
+            if (teacherId == 0)
+            {
+                var model = new TeacherVM()
+                {
+                    CreatedBy = "System",
+                    ImageUrl = "Test",
+                    LastModifiedBy = "System"
+                };
+
+                return View(model);
+            }
+            else
+            {
+                var model = unitOfWork.TeacherRepository.GetTeacher(teacherId);
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Upsert(TeacherVM teacherVm)
         {
            if(ModelState.IsValid)
             {
-                if (teacher.Id == 0)
+                if (teacherVm.Id == 0)
                 {
-                    unitOfWork.TeacherRepository.AddTeachers(teacher);
+                    unitOfWork.TeacherRepository.AddTeachers(GetTeacher(teacherVm));
                     unitOfWork.Save();
                 }
                 else
                 {
-                    unitOfWork.TeacherRepository.UpdateTeachers(teacher);
+                    unitOfWork.TeacherRepository.UpdateTeachers(GetTeacher(teacherVm));
                 }
-                return View(Index);
+                return RedirectToAction("Index");
             }
-            return View(teacher);
+            return View(teacherVm);
         }
 
         [HttpPost]

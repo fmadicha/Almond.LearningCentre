@@ -55,7 +55,13 @@ namespace Almond.LearningCentre.Controllers
         {    
             if (studentId == 0)
             {
-                var model = new Student();
+                var model = new Student() 
+                {
+                    DateOfBirth=DateTime.Today,
+                    CreatedBy ="System" ,
+                    ImageUrl="Test",
+                    LastModifiedBy="System"
+                };
                 return View(model);
             }
             else
@@ -82,7 +88,7 @@ namespace Almond.LearningCentre.Controllers
                     unitOfWork.StudentRepository.UpdateStudents(student);
                     unitOfWork.Save();
                 }
-                return View("Index");
+                return RedirectToAction("Index");
 
             }
             return View(student);

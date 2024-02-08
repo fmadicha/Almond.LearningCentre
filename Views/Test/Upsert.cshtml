@@ -1,9 +1,12 @@
 ﻿
-@model Test
+
+@model TestVM
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 	<input asp-for="Id" hidden />
-	
+    <input asp-for="CreatedBy" hidden />
+    <input asp-for="LastModifiedBy" hidden />
+
 
 	<div class="row">
 		<div class="col-10">
@@ -21,7 +24,7 @@
 		</div>
 		<div class="mb-3">
 			<label asp-for="TotalMark"></label>
-			<textarea asp-for="TotalMark" rows="3" class="form-control"></textarea>
+			<input asp-for="TotalMark" rows="3" class="form-control"/>
 			<span asp-validation-for="TotalMark" class="text-danger"></span>
 		</div>
 		<div class="mb-3 col-6">
@@ -34,19 +37,20 @@
 			<input asp-for="Weight" class="form-control" />
 			<span asp-validation-for="Weight" class="text-danger"></span>
 		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="PdfFile"></label>
-			<input asp-for="PdfFile" class="form-control" />
-			<span asp-validation-for="PdfFile" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="SubjectId"></label>
-			<select asp-for="SubjectId" asp-items="@ViewBag.GradeList" class="form-select">
-				<option disabled selected>--Select SubjectId--</option>
-			</select>
-			<span asp-validation-for="SubjectId" class="text-danger"></span>
-		</div>
 		
+		 <div class="mb-3 col-6">
+            <label asp-for="SubjectId">Subject</label>
+            <select id="SubjectId"  name="SubjectId">
+                <option disabled selected>Subject</option>
+                <option value="2">English</option>
+                <option value="12">Maths</option>
+                <option value="13">Lifeskills</option>
+                <option value="15">Science</option>
+                <option value="16">Geography</option>
+                <option value="17">Biology</option>
+            </select>
+            <span asp-validation-for="SubjectId" class="text-danger"></span>
+        </div>
 		
 		<div class="col-12">
 			@if (Model.Id != 0)
@@ -65,7 +69,7 @@
 	</div>
 		
 	</div>
-
+	</div>
 	
 
 

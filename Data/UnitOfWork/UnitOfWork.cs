@@ -44,9 +44,9 @@ namespace Almond.LearningCentre.Data.UnitOfWork
             GC.SuppressFinalize(this);
         }
 
-        public async Task Save()        {
+        public  void Save()        {
 
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
         }
     }
 }

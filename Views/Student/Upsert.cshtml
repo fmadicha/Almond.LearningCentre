@@ -1,97 +1,103 @@
-﻿
-@model Student
+﻿@model Student
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-	<input asp-for="Id" hidden />
-	<input asp-for="ImageUrl" hidden />
+    <input asp-for="Id" hidden />
+    <input asp-for="ImageUrl" hidden />
+    <input asp-for="CreatedBy" hidden />
+    <input asp-for="LastModifiedBy" hidden />
 
-	<div class="row">
-		<div class="col-10">
-			<div class="border p-3 mt-4 row">
-		<div class="col-12 pb-2">
-			<h2 class="text-primary">@(Model.Id!=0?"Update": "Create")  Student</h2>
-			<hr />
-		</div>
-		@*<div asp-validation-summary="All"></div>*@
-		<div class="mb-3">
-			<label asp-for="ImageUrl"></label>
-			<input type="file" id="uploadBox" name="file" class="form-control" />
-		</div>
-		<div class="mb-3">
-			<label asp-for="FirstName"></label>
-			<input asp-for="FirstName" class="form-control" />
-			<span asp-validation-for="FirstName" class="text-danger"></span>
-		</div>
-		<div class="mb-3">
-			<label asp-for="Surname"></label>
-			<textarea asp-for="Surname" rows="3" class="form-control"></textarea>
-			<span asp-validation-for="Surname" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="DateOfBirth"></label>
-			<input asp-for="DateOfBirth" class="form-control" />
-			<span asp-validation-for="DateOfBirth" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="GuardianName"></label>
-			<input asp-for="GuardianName" class="form-control" />
-			<span asp-validation-for="GuardianName" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="GuardianAddress"></label>
-			<input asp-for="GuardianAddress" class="form-control" />
-			<span asp-validation-for="GuardianAddress" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="Grade"></label>
-			<select asp-for="Grade" asp-items="@ViewBag.GradeList" class="form-select">
-				<option disabled selected>--Select Grade--</option>
-			</select>
-			<span asp-validation-for="Grade" class="text-danger"></span>
-		</div>
-		
-		<div class="mb-3 col-6">
-			<label asp-for="GuardianPhoneNumber"></label>
-			<input asp-for="GuardianPhoneNumber" class="form-control" />
-			<span asp-validation-for="GuardianPhoneNumber" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="GuardianEmail"></label>
-			<input asp-for="GuardianEmail" class="form-control" />
-			<span asp-validation-for="GuardianEmail" class="text-danger"></span>
-		</div>
-		<div class="mb-3 col-6">
-			<label asp-for="Allergies"></label>
-			<input asp-for="Allergies" class="form-control" />
-			<span asp-validation-for="Allergies" class="text-danger"></span>
-		</div><div class="mb-3 col-6">
-			<label asp-for="IsDeleted"></label>
-			<input asp-for="IsDeleted" class="form-control" />
-			<span asp-validation-for="IsDeleted" class="text-danger"></span>
-		</div>
-		<div class="col-12">
-			@if (Model.Id != 0)
-			{
-				<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-			}
-			else
-			{
-				<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
-			}
-			<a asp-controller="Student" asp-action="Index" class="btn btn-secondary" style="width:150px">
-				Back to List
-			</a>
-		</div>
 
-	</div>
-		</div>
-		<div class="col-2 pt-4">
-			<img src="@Model.ImageUrl"
-			width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
-		</div>
-	</div>
 
-	
+
+    <div class="row">
+
+
+        <div class="col-12 pb-2">
+            <h2 class="text-primary">@(Model.Id!=0?"Update": "Create")  Student</h2>
+            <hr />
+        </div>
+
+        @*		<div class="mb-3">
+
+        <label asp-for="ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9">Add your image</label>
+        <input type="file" asp-for="ImageUrl"  />
+
+        </div>*@
+
+        <div class="mb-3">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Surname"></label>
+            <input asp-for="Surname" class="form-control" />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="DateOfBirth"></label>
+            <input asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="GuardianName"></label>
+            <input asp-for="GuardianName" class="form-control" />
+            <span asp-validation-for="GuardianName" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="GuardianAddress"></label>
+            <input asp-for="GuardianAddress" class="form-control" />
+            <span asp-validation-for="GuardianAddress" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Grade">Grade</label>
+            <select id="Grade" name="Grade">
+                <option disabled selected>--Select Grade--</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+            </select>
+            <span asp-validation-for="Grade" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 col-6">
+            <label asp-for="GuardianPhoneNumber"></label>
+            <input asp-for="GuardianPhoneNumber" class="form-control" />
+            <span asp-validation-for="GuardianPhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="GuardianEmail"></label>
+            <input asp-for="GuardianEmail" class="form-control" />
+            <span asp-validation-for="GuardianEmail" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-6">
+            <label asp-for="Allergies"></label>
+            <input asp-for="Allergies" class="form-control" />
+            <span asp-validation-for="Allergies" class="text-danger"></span>
+        </div>
+        <div class="col-12">
+            @if (Model.Id != 0)
+            {
+                <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+            }
+            else
+            {
+                <button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+            }
+            <a asp-controller="Student" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
+        </div>
+
+    </div>
+
+    </div>
+
+
 
 
 
@@ -100,26 +106,26 @@
 </form>
 
 @section Scripts{
-	@{
-	<partial name="_ValidationScriptsPartial" />
-	}
-<script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-      toolbar_mode: 'floating',
-   });
-  
-	function ValidateInput(){
-		if(document.getElementById("uploadBox").value==""){
-			Swal.fire({
-			  icon: 'error',
-			  title: 'Oops...',
-			  text: 'Please upload an Image!',
-			});
-			return false;
-		}
-		return true;
-	}
-</script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            toolbar_mode: 'floating',
+        });
+
+        function ValidateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please upload an Image!',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
 }
